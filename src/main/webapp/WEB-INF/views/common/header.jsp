@@ -12,7 +12,7 @@
 					<li><a href="#">My Account</a></li>
 					<li><a href="cart.html">Your Cart</a></li>
 					<li><a href="checkout.html">Checkout</a></li>
-					<li><a href="register.html">Login</a></li>
+					<li><a href="auth">Login</a></li>
 				</ul>
 			</div>
 		</div>
