@@ -1,4 +1,3 @@
-
 <section class="navbar main-menu">
 	<div class="navbar-inner main-menu">
 		<a href="index.html" class="logo pull-left"><img

@@ -9,25 +9,25 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Account {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACCOUNT_SEQ")
-    @SequenceGenerator(sequenceName = "account_seq", allocationSize = 1, name = "ACCOUNT_SEQ")
-    private Long id;
-    
-    @Column(name = "USER_NAME")
-    private String userName;
-    
-    @Column(name = "PASSWORD")
-    private String password;
+	@SequenceGenerator(sequenceName = "account_seq", allocationSize = 1, name = "ACCOUNT_SEQ")
+	private Long id;
 
-    protected  Account() {
-		
+	@Column(name = "USER_NAME")
+	private String username;
+
+	@Column(name = "PASSWORD")
+	private String password;
+
+	public Account() {
+
 	}
 
-	public Account(String userName, String postName) {
-		this.userName = userName;
-		this.password = postName;
+	public Account(String username, String password) {
+		this.username = username;
+		this.password = password;
 	}
 
 	public Long getId() {
@@ -38,12 +38,12 @@ public class Account {
 		this.id = id;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
