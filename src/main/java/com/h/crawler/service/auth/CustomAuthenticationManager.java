@@ -21,16 +21,17 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		String username = authentication.getPrincipal() + "";
+		String username = authentication.getName();
 		String password = authentication.getCredentials() + "";
 
 		Account user = authRepository.findByUsername(username);
 		if (user == null) {
 			throw new BadCredentialsException("1000");
 		}
-		if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
+		if (!password.equals(user.getPassword())) {
 			throw new BadCredentialsException("1000");
 		}
 		return new UsernamePasswordAuthenticationToken(username, password);
 	}
 }
+

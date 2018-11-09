@@ -38,11 +38,11 @@ public class AuthController {
         userService.save(accountForm);
 
         securityService.autologin(accountForm.getUsername(), accountForm.getPassword());
-
-        return "redirect:/index";
+        System.out.println("\n\n\n\n\n\n hhhhhhhhhhhhhhhhhhh auth");
+        return "redirect:index";
     }
     
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model, String error, String logout) {
         if (error != null) {
             model.addAttribute("error", "Your username and password is invalid.");
@@ -52,7 +52,7 @@ public class AuthController {
         if (logout != null) {
             model.addAttribute("message", "You have been logged out successfully.");
         }
-
+        
         return "index";
     }
 	 
