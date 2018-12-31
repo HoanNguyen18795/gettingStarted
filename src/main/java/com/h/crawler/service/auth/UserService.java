@@ -6,4 +6,6 @@ public interface UserService {
 	public void save(Account account);
 	
 	public Account findByUsername(String username);
+	
+	boolean existByEmail(String email);
 }

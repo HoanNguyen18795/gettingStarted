@@ -8,6 +8,4 @@
 	
 	<bean id = "customHtmlUnitDriver" class = "com.h.crawler.CustomHtmlUnitDriver" lazy-init="true">      
    	</bean>
-   	<bean id = "authenticationManager" class = "com.h.crawler.service.auth.CustomAuthenticationManager" lazy-init="true">      
-   	</bean>
 </beans>

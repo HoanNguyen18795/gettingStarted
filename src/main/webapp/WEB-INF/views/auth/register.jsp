@@ -21,60 +21,75 @@
 				<div class="row">
 					<div class="span5">					
 						<h4 class="title"><span class="text"><strong>Login</strong> Form</span></h4>
-						<form:form action="/login" modelAttribute="accountForm" method="post">
-							<input type="hidden" name="next" value="/">
+						<form:form action="/authenticateUser" modelAttribute="accountLogin"
+							method="POST">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<c:if test="${param.error != null}">
+								<i class="failed">Sorry! You entered invalid
+									username/password.</i>
+							</c:if>
 							<fieldset>
 								<div class="control-group">
 									<label class="control-label">Username</label>
 									<spring:bind path="username">
-									<div class="controls">
-										<form:input type="text" path="username" placeholder="Enter your username" autofocus="true" class="input-xlarge"  id="username"></form:input>
-										<form:errors path="username"></form:errors>
-									</div>
+										<div class="controls">
+											<form:input type="text" path="username"
+												placeholder="Enter your username" autofocus="true"
+												class="input-xlarge"></form:input>
+										</div>
 									</spring:bind>
 								</div>
 								<div class="control-group">
 									<label class="control-label">Password</label>
 									<spring:bind path="password">
-									<div class="controls">
-										<form:input type="password" path="password" placeholder="Enter your password" id="password" class="input-xlarge"></form:input>
-										<form:errors path="password"></form:errors>
-									</div>
+										<div class="controls">
+											<form:input type="password" path="password"
+												placeholder="Enter your password" class="input-xlarge"></form:input>
+										</div>
 									</spring:bind>
 								</div>
 								<div class="control-group">
-									<input tabindex="3" class="btn btn-inverse large" type="submit" value="Sign into your account">
+									<input tabindex="3" class="btn btn-inverse large" type="submit"
+										value="Sign into your account">
 									<hr>
-									<p class="reset">Recover your <a tabindex="4" href="#" title="Recover your username or password">username or password</a></p>
+									<p class="reset">
+										Recover your <a tabindex="4" href="#"
+											title="Recover your username or password">username or
+											password</a>
+									</p>
 								</div>
 							</fieldset>
-						</form:form>				
-					</div>
+						</form:form>
+			</div>
 					<div class="span7">					
 						<h4 class="title"><span class="text"><strong>Register</strong> Form</span></h4>
 						<form:form method="POST" modelAttribute="accountForm" action="/registration" class="form-stacked">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<fieldset>
 								<div class="control-group">
 									<label class="control-label">Username</label>
-									<spring:bind path="username">
-									<div class="controls">
-										<form:input type="text" path="username" placeholder="Username" autofocus="true"></form:input>
-										<form:errors path="username"></form:errors>
-									</div>									
+									<spring:bind path="name">
+										<div class="controls">
+											<form:input type="text" path="name" placeholder="Username" autofocus="true"></form:input>
+											<form:errors path="name"></form:errors>
+										</div>									
 									</spring:bind>
 								</div>
 								<div class="control-group">
 									<label class="control-label">Email address:</label>
-									<div class="controls">
-										<input type="password" placeholder="Enter your email" class="input-xlarge">
-									</div>
+									<spring:bind path="registEmail">
+										<div class="controls">
+											<form:input type="text" path="registEmail" placeholder="Enter your email" class="input-large"/>
+											<form:errors path="registEmail"></form:errors>
+										</div>
+									</spring:bind>
 								</div>
 								<div class="control-group">
 									<label class="control-label">Password:</label>
-									<spring:bind path="password">
+									<spring:bind path="registPassword">
 									<div class="controls">									      
-          								<form:input type="password" path="password" placeholder="Password"></form:input>
-										<form:errors path="password"></form:errors>
+          								<form:input type="password" path="registPassword" placeholder="Password"></form:input>
+										<form:errors path="registPassword"></form:errors>
 									</div>
 									</spring:bind>
 								</div>							                            

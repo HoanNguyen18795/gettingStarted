@@ -25,4 +25,10 @@ public class UserServiceImpl implements UserService {
 		return authRepository.findByUsername(username);
 	}
 
+	@Override
+	public boolean existByEmail(String email) {
+		// TODO Auto-generated method stub
+		return authRepository.existByEmail(email);
+	}
+
 }

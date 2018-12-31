@@ -52,6 +52,9 @@ var adjustMenu = function() {
 		});
 	}
 }
+$("#logoutBtn").click(function () {
+	$("#logoutForm").submit();
+});
 
 //Menu
 $('#menu > ul').superfish({ 
@@ -61,3 +64,4 @@ $('#menu > ul').superfish({
 	arrowClass: false,
 	autoArrows:  true
 });
+

@@ -7,10 +7,14 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.h.crawler.model.auth.Account;
+import com.h.crawler.model.auth.RegistAccount;
 import com.h.crawler.service.auth.UserService;
 
 @Component
 public class AccountValidator implements Validator{
+
+	private static final 
+	String EMAIL_PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 
 	@Autowired
 	private UserService userService;
@@ -23,18 +27,29 @@ public class AccountValidator implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		Account account = (Account) target;
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-        if (account.getUsername().length() < 6 || account.getUsername().length() > 32) {
-            errors.rejectValue("username", "Size.userForm.username");
+		RegistAccount account = (RegistAccount) target;
+		
+		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registPassword", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registEmail", "NotEmpty");
+        if (account.getName().length() < 6 || account.getName().length() > 32) {
+            errors.rejectValue("name", "Size.userForm.username");
         }
-        if (userService.findByUsername(account.getUsername()) != null) {
-            errors.rejectValue("username", "Duplicate.userForm.username");
+        if (userService.findByUsername(account.getName()) != null) {
+            errors.rejectValue("registUsername", "Duplicate.userForm.username");
         }
+        if (!account.getRegistEmail().matches(EMAIL_PATTERN)) {
+        	errors.rejectValue("registEmail", "Format.userForm.email");
+		}
+        
+        if (userService.existByEmail(account.getRegistEmail())) {
+        	errors.rejectValue("registEmail", "Duplicate.userForm.email");
+		}
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-        if (account.getPassword().length() < 8 || account.getPassword().length() > 32) {
-            errors.rejectValue("password", "Size.userForm.password");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registPassword", "NotEmpty");
+        if (account.getRegistPassword().length() < 8 || account.getRegistPassword().length() > 32) {
+            errors.rejectValue("registPassword", "Size.userForm.password");
         }
     }
 		

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.h.crawler.model.auth.Account;
+import com.h.crawler.model.auth.RegistAccount;
 import com.h.crawler.service.auth.SecurityService;
 import com.h.crawler.service.auth.UserService;
 import com.h.crawler.validator.auth.AccountValidator;
@@ -28,37 +29,25 @@ public class AuthController {
 	 
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("accountForm") Account accountForm, BindingResult bindingResult, Model model) {
+    public String registration(@ModelAttribute("accountForm") RegistAccount accountForm
+    						, BindingResult bindingResult
+    						, Model model) {
         userValidator.validate(accountForm, bindingResult);
-
+        
         if (bindingResult.hasErrors()) {
             return "auth/register";
         }
+        Account account = new Account(accountForm.getName(), accountForm.getRegistPassword(), accountForm.getRegistEmail());
+        userService.save(account);
 
-        userService.save(accountForm);
-
-        securityService.autologin(accountForm.getUsername(), accountForm.getPassword());
-        System.out.println("\n\n\n\n\n\n hhhhhhhhhhhhhhhhhhh auth");
-        return "redirect:index";
+        securityService.autologin(account.getUsername(), account.getPassword());
+        return "redirect:/";
     }
-    
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(Model model, String error, String logout) {
-        if (error != null) {
-            model.addAttribute("error", "Your username and password is invalid.");
-            return "auth/register";
-        }
 
-        if (logout != null) {
-            model.addAttribute("message", "You have been logged out successfully.");
-        }
-        
-        return "index";
-    }
-	 
 	@GetMapping("/auth")
 	public String showAuth(Model model) {
-		model.addAttribute("accountForm", new Account());
+		model.addAttribute("accountLogin", new Account());
+		model.addAttribute("accountForm", new RegistAccount());
 		return "auth/register";
 	}
 }
