@@ -1,6 +1,6 @@
 <section class="navbar main-menu">
 	<div class="navbar-inner main-menu">
-		<a href="index.html" class="logo pull-left"><img
+		<a href="/" class="logo pull-left"><img
 			src="themes/images/logo.png" class="site_logo" alt=""></a>
 		<nav id="menu" class="pull-right">
 			<ul>

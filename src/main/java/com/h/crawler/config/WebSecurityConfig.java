@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -37,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/themes/**", "/bootstrap/**","/registration","/index").permitAll()
+                    .antMatchers("/themes/**", "/bootstrap/**","/registration","/index","product/detail/bootstrap/**","product/detail/thems/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()

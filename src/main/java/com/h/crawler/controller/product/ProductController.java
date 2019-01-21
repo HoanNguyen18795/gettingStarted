@@ -1,7 +1,8 @@
-package com.h.crawler.controller.auth.product;
+package com.h.crawler.controller.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,11 +17,14 @@ public class ProductController {
 	private ProductService productService;
 	
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
-	public String showProduct(@PathVariable(value = "id") String id) {
+	public String showProduct(@PathVariable(value = "id") String id, Model model) {
 		Product product = productService.getProduct(Long.valueOf(id));
-		product.getCategory();
-		return "";
+		boolean isAvailable = product.getTotal() >0;
+		if(isAvailable) {
+			model.addAttribute("total", product.getTotal());
+		}
+		model.addAttribute("isAvailable", isAvailable);
+		model.addAttribute("product", product);
+		return "product/detail";
 	}
-		
-
 }
