@@ -24,16 +24,16 @@
 							<a href="${product.img}" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="${product.img}"></a>									
 							<ul class="thumbnails small">								
 								<li class="span1">
-									<a href="themes/images/ladies/2.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 2"><img src="themes/images/ladies/2.jpg" alt=""></a>
+									<a href="${product.img1}" class="thumbnail" data-fancybox-group="group1" title="Description 2"><img src="${product.img1}" alt=""></a>
 								</li>								
 								<li class="span1">
-									<a href="themes/images/ladies/3.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 3"><img src="themes/images/ladies/3.jpg" alt=""></a>
+									<a href="${product.img2}" class="thumbnail" data-fancybox-group="group1" title="Description 3"><img src="${product.img2}" alt=""></a>
 								</li>													
 								<li class="span1">
-									<a href="themes/images/ladies/4.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 4"><img src="themes/images/ladies/4.jpg" alt=""></a>
+									<a href="${product.img3}" class="thumbnail" data-fancybox-group="group1" title="Description 4"><img src="${product.img3}" alt=""></a>
 								</li>
 								<li class="span1">
-									<a href="themes/images/ladies/5.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 5"><img src="themes/images/ladies/5.jpg" alt=""></a>
+									<a href="${product.img4}" class="thumbnail" data-fancybox-group="group1" title="Description 5"><img src="${product.img4}" alt=""></a>
 								</li>
 							</ul>
 						</div>

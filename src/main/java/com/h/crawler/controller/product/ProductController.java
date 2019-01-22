@@ -23,7 +23,7 @@ public class ProductController {
 		if(isAvailable) {
 			model.addAttribute("total", product.getTotal());
 		}
-		model.addAttribute("isAvailable", isAvailable);
+		model.addAttribute("isAvailable", product.getTotal() >0?true:false);
 		model.addAttribute("product", product);
 		return "product/detail";
 	}
