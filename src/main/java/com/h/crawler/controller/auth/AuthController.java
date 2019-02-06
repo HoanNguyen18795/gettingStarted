@@ -1,5 +1,8 @@
 package com.h.crawler.controller.auth;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.h.crawler.model.Cart.Cart;
 import com.h.crawler.model.auth.Account;
 import com.h.crawler.model.auth.RegistAccount;
 import com.h.crawler.service.auth.SecurityService;
@@ -37,9 +41,17 @@ public class AuthController {
         if (bindingResult.hasErrors()) {
             return "auth/register";
         }
+        Cart cart = new Cart();
+        LocalDate localDate = LocalDate.now();
+        cart.setInsDate(Date.valueOf(localDate));
+        cart.setUpdDate(Date.valueOf(localDate));
+        
         Account account = new Account(accountForm.getName(), accountForm.getRegistPassword(), accountForm.getRegistEmail());
+        
+        account.setCart(cart);
+        cart.setAccount(account);
         userService.save(account);
-
+      
         securityService.autologin(account.getUsername(), account.getPassword());
         return "redirect:/";
     }

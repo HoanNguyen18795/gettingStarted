@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.h.crawler.model.Cart.Cart;
+
 @Entity
 @Table(name = "PRODUCT")
 public class Product {
@@ -28,6 +30,20 @@ public class Product {
 				,inverseJoinColumns = @JoinColumn(name = "ORDER_ID"))
 	private Set<Order> orders;
 	
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "PRODUCT_CART"
+			,joinColumns = @JoinColumn(name = "PRODUCT_ID")
+			,inverseJoinColumns = @JoinColumn(name = "CART_ID"))
+	private Set<Cart> carts;
+	
+	public Set<Cart> getCarts() {
+		return carts;
+	}
+
+	public void setCarts(Set<Cart> carts) {
+		this.carts = carts;
+	}
+
 	@Column(name = "IMG")
 	private String img;
 

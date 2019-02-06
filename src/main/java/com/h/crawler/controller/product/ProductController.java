@@ -27,4 +27,8 @@ public class ProductController {
 		model.addAttribute("product", product);
 		return "product/detail";
 	}
+	@RequestMapping(value = "/addToCart", method = RequestMethod.GET)
+	public String addToCart() {
+		return "";
+	}
 }

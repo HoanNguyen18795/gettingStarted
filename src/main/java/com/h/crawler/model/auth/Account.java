@@ -2,15 +2,18 @@ package com.h.crawler.model.auth;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.h.crawler.model.Order;
+import com.h.crawler.model.Cart.Cart;
 
 @Entity
 public class Account {
@@ -22,6 +25,9 @@ public class Account {
 
 	@OneToMany(mappedBy = "accountId")
 	private List<Order> orderList;
+	
+	@OneToOne(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Cart cart;
 
 	@Column(name = "USER_NAME")
 	private String username;
@@ -74,4 +80,21 @@ public class Account {
 		this.email = email;
 	}
 
+	public List<Order> getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+		cart.setAccount(this);
+	}
+	
 }
