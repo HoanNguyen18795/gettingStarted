@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.h.crawler.model.auth.Account;
+import com.h.crawler.model.auth.UserAccount;
 import com.h.crawler.repository.auth.AuthRepository;
 
 @Service
@@ -28,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 		grantedAuthorities.add(new SimpleGrantedAuthority("ADM"));
 		
-		return new org.springframework.security.core.userdetails.User(account.getUsername(), account.getPassword(), grantedAuthorities);
+		return new UserAccount(account.getUsername(), account.getPassword(), grantedAuthorities, account.getId());
 	}
 
 }

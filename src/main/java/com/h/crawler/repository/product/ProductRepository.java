@@ -1,5 +1,6 @@
 package com.h.crawler.repository.product;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +16,13 @@ public interface ProductRepository extends CrudRepository<Product, Long>{
 	public List<Product> getFeatureProduct();
 	
 	public Product findById (long id);
+	
+	@Query(value = "SELECT CASE WHEN COUNT(1) > 0 THEN 'true' ELSE 'false' END FROM PRODUCT WHERE PRODUCT.ID = ?1 AND PRODUCT.TOTAL - ?2> 0", nativeQuery = true)
+	public boolean isAvalable(Long id, Long quantity);
+	
+	@Query(value = "INSERT INTO PRODUCT_CART (ID, CART_ID, PRODUCT_ID, QUANTITY, INS_DATE, UPD_DATE, DEL_FLG) VALUES(PRODUCT_CART_SEQUENCE.NEXTVAL, ?1, ?2, ?3, ?4, ?5, ?6)", nativeQuery = true)
+	public void insertProductCart(Long cartId, Long productId, Long quantity, Date insDate, Date updDate, Long delFlg);
+	
+	@Query(value = "UPDATE PRODUCT SET TOTAL = TOTAL - ?1 WHERE ID = ?2", nativeQuery = true)
+	public void updateProductTotal(Long quantity, Long productId);
 }

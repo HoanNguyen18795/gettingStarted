@@ -7,6 +7,7 @@
 <html>
 <head>
 	<%@ include file = "../common/head.jsp" %>
+	<script type="text/javascript" src="/bootstrap/js/product/productJS.js"></script>
 </head>
 <body>
 	<%@ include file = "../common/header.jsp" %>
@@ -57,7 +58,7 @@
 							<h4><strong>Price: $<c:out value="${product.price}"></c:out></strong></h4>
 						</div>
 						<div class="span5">
-							<form class="form-inline">
+							<div class="form-inline">
 								<label class="checkbox">
 									<input type="checkbox" value=""> Option one is this and that
 								</label>
@@ -67,9 +68,10 @@
 								</label>
 								<p>&nbsp;</p>
 								<label>Qty:</label>
-								<input type="text" class="span1" placeholder="1">
-								<button class="btn btn-inverse" type="submit">Add to cart</button>
-							</form>
+								<input type="text" class="span1" placeholder="1" id="addToCart">
+								<input type="hidden" value="${product.id}" id="productId">
+								<button class="btn btn-inverse" id="addToCartBtn">Add to cart</button>
+							</div>
 						</div>							
 					</div>
 					<div class="row">

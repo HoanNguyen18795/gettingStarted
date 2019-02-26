@@ -13,4 +13,5 @@ public interface AuthRepository extends CrudRepository<Account, Long>{
 	
 	@Query("SELECT CASE WHEN COUNT(1) > 0 THEN 'true' ELSE 'false' END FROM Account WHERE EMAIL = ?1")
 	boolean existByEmail(String email);
+	
 }
