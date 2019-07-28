@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.h.crawler.model.Product;
 import com.h.crawler.model.auth.UserAccount;
 import com.h.crawler.service.product.ProductService;
+import com.h.crawler.util.UserUtil;
 
 @Controller
 @RequestMapping("/product")
@@ -25,6 +27,7 @@ public class ProductController {
 	
 	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
 	public String showProduct(@PathVariable(value = "id") String id, Model model) {
+		UserUtil.setLogin(model, SecurityContextHolder.getContext());
 		Product product = productService.getProduct(Long.valueOf(id));
 		boolean isAvailable = product.getTotal() >0;
 		if(isAvailable) {

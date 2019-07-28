@@ -53,6 +53,7 @@ var adjustMenu = function() {
 	}
 }
 $("#logoutBtn").click(function () {
+	debugger;
 	$("#logoutForm").submit();
 });
 

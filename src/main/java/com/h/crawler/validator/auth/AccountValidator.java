@@ -37,7 +37,7 @@ public class AccountValidator implements Validator{
             errors.rejectValue("name", "Size.userForm.username");
         }
         if (userService.findByUsername(account.getName()) != null) {
-            errors.rejectValue("registUsername", "Duplicate.userForm.username");
+            errors.rejectValue("name", "Duplicate.userForm.username");
         }
         if (!account.getRegistEmail().matches(EMAIL_PATTERN)) {
         	errors.rejectValue("registEmail", "Format.userForm.email");

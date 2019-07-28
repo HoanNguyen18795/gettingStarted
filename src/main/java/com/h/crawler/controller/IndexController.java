@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.h.crawler.model.Product;
 import com.h.crawler.service.product.ProductService;
+import com.h.crawler.util.UserUtil;
 
 @Controller
 public class IndexController {
@@ -20,10 +21,8 @@ public class IndexController {
 	
 	@GetMapping("/")
 	public String gretting(Model model) {
-		Object principal = SecurityContextHolder.getContext().getAuthentication();
-		if (principal != null) {
-			model.addAttribute("isLogedin", true);
-		}
+		UserUtil.setLogin(model, SecurityContextHolder.getContext());
+		
 		List<Product> featuredProductList = productService.getFeturedProductList();
 		model.addAttribute("featureProductList", featuredProductList);
 		return "index";

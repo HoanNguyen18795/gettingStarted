@@ -39,6 +39,7 @@ public class AuthController {
         userValidator.validate(accountForm, bindingResult);
         
         if (bindingResult.hasErrors()) {
+        	model.addAttribute("accountLogin", new Account());
             return "auth/register";
         }
         Cart cart = new Cart();
@@ -61,5 +62,12 @@ public class AuthController {
 		model.addAttribute("accountLogin", new Account());
 		model.addAttribute("accountForm", new RegistAccount());
 		return "auth/register";
+	}
+	
+	@GetMapping(value="/happyLandLogin")
+	public String happyLandLogin(Model model) {
+		model.addAttribute("accountLogin", new Account());
+		model.addAttribute("accountForm", new RegistAccount());
+		return "auth/login";
 	}
 }

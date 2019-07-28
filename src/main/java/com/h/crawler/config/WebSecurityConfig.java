@@ -36,11 +36,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/themes/**", "/bootstrap/**","/registration","/index","product/detail/bootstrap/**","product/detail/thems/**").permitAll()
+                    .antMatchers("/themes/**", "/bootstrap/**","/registration","/index","product/detail/bootstrap/**","product/detail/thems/**", "/admin/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
-                    .loginPage("/auth").loginProcessingUrl("/authenticateUser")
+                    .loginPage("/happyLandLogin").loginProcessingUrl("/authenticateUser")
                     .permitAll()
                     .and()
                 .logout()

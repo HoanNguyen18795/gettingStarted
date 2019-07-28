@@ -1,13 +1,21 @@
 package com.h.crawler.util;
 
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.ui.Model;
 
 import com.h.crawler.model.auth.UserAccount;
 
 public class UserUtil {
 	
-	public static Long getUserId() {
-		Object userPrincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	public static Long getUserId(SecurityContext securityContext) {
+		Object userPrincipal = securityContext.getAuthentication().getPrincipal();
 		return ((UserAccount) userPrincipal).getId();
+	}
+	public static Model setLogin(Model model, SecurityContext securityContext) {
+		Object principal = securityContext.getAuthentication();
+		if (principal != null) {
+			model.addAttribute("isLogedin", true);
+		}
+		return model;
 	}
 }
