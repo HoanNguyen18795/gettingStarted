@@ -19,12 +19,17 @@ public class IndexController {
 	 @Autowired
 	 private ProductService productService;
 	
+//	@GetMapping("/")
+//	public String gretting(Model model) {
+//		UserUtil.setLogin(model, SecurityContextHolder.getContext());
+//		
+//		List<Product> featuredProductList = productService.getFeturedProductList();
+//		model.addAttribute("featureProductList", featuredProductList);
+//		return "index";
+//	}
+	
 	@GetMapping("/")
 	public String gretting(Model model) {
-		UserUtil.setLogin(model, SecurityContextHolder.getContext());
-		
-		List<Product> featuredProductList = productService.getFeturedProductList();
-		model.addAttribute("featureProductList", featuredProductList);
-		return "index";
+		return "adminIndex";
 	}
 }

@@ -7,6 +7,10 @@ import com.h.crawler.model.auth.UserAccount;
 
 public class UserUtil {
 	
+	public static final String ADMIN = "AD";
+	
+	public static final String USER = "US";
+	
 	public static Long getUserId(SecurityContext securityContext) {
 		Object userPrincipal = securityContext.getAuthentication().getPrincipal();
 		return ((UserAccount) userPrincipal).getId();

@@ -17,6 +17,7 @@ import com.h.crawler.model.auth.Account;
 import com.h.crawler.model.auth.RegistAccount;
 import com.h.crawler.service.auth.SecurityService;
 import com.h.crawler.service.auth.UserService;
+import com.h.crawler.util.UserUtil;
 import com.h.crawler.validator.auth.AccountValidator;
 
 @Controller
@@ -47,7 +48,7 @@ public class AuthController {
         cart.setInsDate(Date.valueOf(localDate));
         cart.setUpdDate(Date.valueOf(localDate));
         
-        Account account = new Account(accountForm.getName(), accountForm.getRegistPassword(), accountForm.getRegistEmail());
+        Account account = new Account(accountForm.getName(), accountForm.getRegistPassword(), accountForm.getRegistEmail(), UserUtil.ADMIN);
         
         account.setCart(cart);
         cart.setAccount(account);

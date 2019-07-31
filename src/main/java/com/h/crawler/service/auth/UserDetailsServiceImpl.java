@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.h.crawler.model.auth.Account;
 import com.h.crawler.model.auth.UserAccount;
 import com.h.crawler.repository.auth.AuthRepository;
+import com.h.crawler.util.UserUtil;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -27,7 +28,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		Account account = authRepo.findByUsername(userName);
 		
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-		grantedAuthorities.add(new SimpleGrantedAuthority("ADM"));
+		grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		if(UserUtil.ADMIN.equals(account.getRole())) {
+			grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}
 		
 		return new UserAccount(account.getUsername(), account.getPassword(), grantedAuthorities, account.getId());
 	}

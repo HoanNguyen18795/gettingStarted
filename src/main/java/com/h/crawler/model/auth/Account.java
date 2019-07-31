@@ -37,12 +37,11 @@ public class Account {
 
 	@Column(name = "EMAIL", unique = true)
 	private String email;
+	
+	@Column(name = "ROLE")
+	private String role;
 
-	public Account() {
-
-	}
-
-	public Account(String username, String password, String email) {
+	public Account(String username, String password, String email, String role) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -95,6 +94,18 @@ public class Account {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 		cart.setAccount(this);
+	}
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public Account() {
+
 	}
 	
 }
