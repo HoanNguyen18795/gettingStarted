@@ -32,20 +32,20 @@ public class AccountValidator implements Validator{
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registPassword", "NotEmpty");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registEmail", "NotEmpty");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registEmail", "NotEmpty");
         if (account.getName().length() < 6 || account.getName().length() > 32) {
             errors.rejectValue("name", "Size.userForm.username");
         }
         if (userService.findByUsername(account.getName()) != null) {
             errors.rejectValue("name", "Duplicate.userForm.username");
         }
-        if (!account.getRegistEmail().matches(EMAIL_PATTERN)) {
-        	errors.rejectValue("registEmail", "Format.userForm.email");
-		}
+//        if (!account.getRegistEmail().matches(EMAIL_PATTERN)) {
+//        	errors.rejectValue("registEmail", "Format.userForm.email");
+//		}
         
-        if (userService.existByEmail(account.getRegistEmail())) {
-        	errors.rejectValue("registEmail", "Duplicate.userForm.email");
-		}
+//        if (userService.existByEmail(account.getRegistEmail())) {
+//        	errors.rejectValue("registEmail", "Duplicate.userForm.email");
+//		}
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registPassword", "NotEmpty");
         if (account.getRegistPassword().length() < 8 || account.getRegistPassword().length() > 32) {

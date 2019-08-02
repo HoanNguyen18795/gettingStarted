@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -56,6 +57,21 @@ public class AuthController {
       
         securityService.autologin(account.getUsername(), account.getPassword());
         return "redirect:/";
+    }
+    
+    @RequestMapping(value="/adminRegistration", method = RequestMethod.POST)
+    public String adminRegistration(@ModelAttribute("accountForm") RegistAccount accountForm
+    								, BindingResult bindingResult
+    								, Model model) {
+    	 if (bindingResult.hasErrors()) {
+         	model.addAttribute("accountLogin", new Account());
+            return "auth/register";
+         }
+    	 Account account = new Account(accountForm.getName(), accountForm.getRegistPassword(), UserUtil.FIXED_EMAIL, StringUtils.isEmpty(accountForm.getIsAdmin()) ? UserUtil.ADMIN : UserUtil.USER);
+    	 
+    	 userService.save(account);
+    	 securityService.autologin(account.getUsername(), account.getPassword());
+    	 return "redirect:/";
     }
 
 	@GetMapping("/auth")

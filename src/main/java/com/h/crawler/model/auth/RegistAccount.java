@@ -6,6 +6,16 @@ public class RegistAccount {
 	private String registEmail;
 	
 	private String registPassword;
+	
+	private String isAdmin;
+
+	public String getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(String isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 
 	public String getName() {
 		return name;

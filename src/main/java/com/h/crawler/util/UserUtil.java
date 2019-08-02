@@ -11,6 +11,8 @@ public class UserUtil {
 	
 	public static final String USER = "US";
 	
+	public static final String FIXED_EMAIL = "testEmail@abc.com";
+	
 	public static Long getUserId(SecurityContext securityContext) {
 		Object userPrincipal = securityContext.getAuthentication().getPrincipal();
 		return ((UserAccount) userPrincipal).getId();

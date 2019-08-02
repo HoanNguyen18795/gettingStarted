@@ -21,8 +21,7 @@
 				<div class="row">
 					<div class="span5">					
 						<h4 class="title"><span class="text"><strong>Login</strong> Form</span></h4>
-						<form:form action="/authenticateUser" modelAttribute="accountLogin"
-							method="POST">
+						<form:form action="/authenticateUser" modelAttribute="accountLogin" method="POST">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<c:if test="${param.error != null}">
 								<i class="failed">Sorry! You entered invalid
