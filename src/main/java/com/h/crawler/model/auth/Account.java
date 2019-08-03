@@ -1,5 +1,6 @@
 package com.h.crawler.model.auth;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -40,11 +41,16 @@ public class Account {
 	
 	@Column(name = "ROLE")
 	private String role;
+	
+	private Long creatorId;
+	
+	private Date createdDate;
 
 	public Account(String username, String password, String email, String role) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.role= role;
 	}
 
 	public Long getId() {
@@ -102,6 +108,22 @@ public class Account {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+	public Long getCreatorId() {
+		return creatorId;
+	}
+
+	public void setCreatorId(Long creatorId) {
+		this.creatorId = creatorId;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	public Account() {

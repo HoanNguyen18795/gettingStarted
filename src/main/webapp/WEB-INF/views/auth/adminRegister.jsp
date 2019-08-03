@@ -20,12 +20,12 @@
 	              <div class="text-center">
 	                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
 	              </div>
-	              <form:form method="POST" modelAttribute="accountForm" action="/registration" class="user">
+	              <form:form method="POST" modelAttribute="accountForm" action="/adminRegistration" class="user">
 	              	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		                <div class="form-group row">
 		                 <spring:bind path="name">
 			                  <div class="col-sm-6 mb-3 mb-sm-0">
-			                  	<form:input type="text" path="name" placeholder="Username" autofocus="true" class="form-control form-control-user"></form:input>
+			                  	<form:input type="text" path="name" placeholder="Username" autofocus="true" class="form-control form-control-user" required></form:input>
 			                  	<form:errors path="name"></form:errors>
 			                  </div>
 		                  </spring:bind>
@@ -33,26 +33,26 @@
 		                <div class="form-group row">
 		                	<spring:bind path="registPassword">
 			                  <div class="col-sm-6 mb-3 mb-sm-0">
-			                    <form:input type="password" path="registPassword" placeholder="Password"  class="form-control form-control-user"></form:input>
+			                    <form:input type="password" path="registPassword" placeholder="Password"  class="form-control form-control-user" required></form:input>
 								<form:errors path="registPassword"></form:errors>
 			                  </div>
 		                  	</spring:bind>
-		                  <div class="col-sm-6">
-		                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
-		                  </div>
 		                </div>
 		                <div class="form-group row">
-		                  <form:checkbox class="form-control form-control-user" path="isAdmin" value="true"/>IS ADMIN
+		                	<div class="col-sm-6">
+		                    	<form:input type="password" path="repeatRegistPassword" class="form-control form-control-user" placeholder="Repeat Password" required></form:input>
+		                    	<form:errors path="registPassword"></form:errors>
+		                  	</div>
+		                </div>
+		                <div class="form-group row">
+		                	<div class="col-sm-8 form-check">
+		                  		<form:checkbox class="form-check-input" path="isAdmin" value="true" id="isAdminCheckBox"/>
+		                  		<label class="form-check-label" for="isAdminCheckBox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Is Admin </label>
+		                  	</div>
 		                </div>
 		                <input class="btn btn-inverse large" type="submit" value="Create account">
 	              </form:form>
 	              <hr>
-	              <div class="text-center">
-	                <a class="small" href="forgot-password.html">Forgot Password?</a>
-	              </div>
-	              <div class="text-center">
-	                <a class="small" href="login.html">Already have an account? Login!</a>
-	              </div>
 	            </div>
 	          </div>
 	        </div>

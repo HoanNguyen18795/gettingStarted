@@ -1,5 +1,6 @@
 package com.h.crawler.validator.auth;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -9,6 +10,7 @@ import org.springframework.validation.Validator;
 import com.h.crawler.model.auth.Account;
 import com.h.crawler.model.auth.RegistAccount;
 import com.h.crawler.service.auth.UserService;
+import com.h.crawler.util.Constants;
 
 @Component
 public class AccountValidator implements Validator{
@@ -32,11 +34,12 @@ public class AccountValidator implements Validator{
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registPassword", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "repeatRegistPassword", "NotEmpty");
 //		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registEmail", "NotEmpty");
-        if (account.getName().length() < 6 || account.getName().length() > 32) {
+        if (StringUtils.isNotEmpty(account.getName()) && (account.getName().length() < 6 || account.getName().length() > 32)) {
             errors.rejectValue("name", "Size.userForm.username");
         }
-        if (userService.findByUsername(account.getName()) != null) {
+        if (StringUtils.isNotEmpty(account.getName()) && userService.findByUsername(account.getName()) != null) {
             errors.rejectValue("name", "Duplicate.userForm.username");
         }
 //        if (!account.getRegistEmail().matches(EMAIL_PATTERN)) {
@@ -47,10 +50,10 @@ public class AccountValidator implements Validator{
 //        	errors.rejectValue("registEmail", "Duplicate.userForm.email");
 //		}
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registPassword", "NotEmpty");
-        if (account.getRegistPassword().length() < 8 || account.getRegistPassword().length() > 32) {
+        if (StringUtils.isNotEmpty(account.getRegistPassword()) && (account.getRegistPassword().length() < Constants.MIN_PASSWORD_LENGTH || account.getRegistPassword().length() > Constants.MAX_PASSWORD_LENGTH)) {
             errors.rejectValue("registPassword", "Size.userForm.password");
         }
+        
     }
 		
 }

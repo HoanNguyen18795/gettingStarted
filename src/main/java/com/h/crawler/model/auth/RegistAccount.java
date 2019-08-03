@@ -7,6 +7,8 @@ public class RegistAccount {
 	
 	private String registPassword;
 	
+	private String repeatRegistPassword;
+	
 	private String isAdmin;
 
 	public String getIsAdmin() {
@@ -41,6 +43,12 @@ public class RegistAccount {
 		this.registPassword = registPassword;
 	}
 	
-	
+	public String getRepeatRegistPassword() {
+		return repeatRegistPassword;
+	}
 
+	public void setRepeatRegistPassword(String repeatRegistPassword) {
+		this.repeatRegistPassword = repeatRegistPassword;
+	}
+	
 }

@@ -12,16 +12,6 @@
     <body>		
 		<!-- Page Wrapper -->
 	  <div id="wrapper">
-
-		<security:authorize access="hasRole('ROLE_USER')">
-    This text is only visible to a user
-    <br />
-		</security:authorize>
-		<security:authorize access="hasRole('ROLE_ADMIN')">
-    This text is only visible to an admin
-    <br />
-		</security:authorize>
-
 		<!-- Sidebar -->
 	    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 	
@@ -51,21 +41,15 @@
 	        Interface
 	      </div>
 	
-	      <!-- Nav Item - Pages Collapse Menu -->
-	      <li class="nav-item">
-	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-	          <i class="fas fa-fw fa-cog"></i>
-	          <span>Components</span>
-	        </a>
-	        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-	          <div class="bg-white py-2 collapse-inner rounded">
-	            <h6 class="collapse-header">Custom Components:</h6>
-	            <a class="collapse-item" href="buttons.html">Buttons</a>
-	            <a class="collapse-item" href="cards.html">Cards</a>
-	          </div>
-	        </div>
-	      </li>
-	
+	      <!-- Nav Item - Create a new account for admon users only -->
+	      <security:authorize access="hasRole('ROLE_ADMIN')">
+		      <li class="nav-item">
+		        <a class="nav-link collapsed" href="/showAdminRegistration">
+		          <i class="fas fa-fw fa-cog"></i>
+		          <span>Create an account</span>
+		        </a>
+		      </li>
+	      </security:authorize>
 	      <!-- Nav Item - Utilities Collapse Menu -->
 	      <li class="nav-item">
 	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">

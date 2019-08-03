@@ -2,6 +2,7 @@ package com.h.crawler.controller.auth;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,18 +60,24 @@ public class AuthController {
         return "redirect:/";
     }
     
+    @RequestMapping(value="/showAdminRegistration", method = RequestMethod.GET)
+    public String showAdminRegistration(Model model) {
+    	model.addAttribute("accountForm", new RegistAccount());
+    	return "auth/adminRegister";
+    }
+    
     @RequestMapping(value="/adminRegistration", method = RequestMethod.POST)
     public String adminRegistration(@ModelAttribute("accountForm") RegistAccount accountForm
     								, BindingResult bindingResult
     								, Model model) {
     	 if (bindingResult.hasErrors()) {
          	model.addAttribute("accountLogin", new Account());
-            return "auth/register";
+            return "auth/adminRegister";
          }
-    	 Account account = new Account(accountForm.getName(), accountForm.getRegistPassword(), UserUtil.FIXED_EMAIL, StringUtils.isEmpty(accountForm.getIsAdmin()) ? UserUtil.ADMIN : UserUtil.USER);
-    	 
+    	 Account account = new Account(accountForm.getName(), accountForm.getRegistPassword(), UserUtil.FIXED_EMAIL, StringUtils.isEmpty(accountForm.getIsAdmin()) ? UserUtil.USER : UserUtil.ADMIN);
+    	 account.setCreatorId(UserUtil.getUserSession().getId());
+    	 account.setCreatedDate(Date.valueOf(LocalDate.now()));
     	 userService.save(account);
-    	 securityService.autologin(account.getUsername(), account.getPassword());
     	 return "redirect:/";
     }
 
@@ -84,7 +91,6 @@ public class AuthController {
 	@GetMapping(value="/happyLandLogin")
 	public String happyLandLogin(Model model) {
 		model.addAttribute("accountLogin", new Account());
-		model.addAttribute("accountForm", new RegistAccount());
 		return "auth/login";
 	}
 }
