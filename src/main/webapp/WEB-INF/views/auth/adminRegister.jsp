@@ -7,7 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-	<%@ include file = "../common/head.jsp" %>
+	<%@ include file = "../common/commonAdminHead.jsp" %>
 </head>
     <body>		
 	    <div class="card o-hidden border-0 shadow-lg my-5">
@@ -25,7 +25,7 @@
 		                <div class="form-group row">
 		                 <spring:bind path="name">
 			                  <div class="col-sm-6 mb-3 mb-sm-0">
-			                  	<form:input type="text" path="name" placeholder="Username" autofocus="true" class="form-control form-control-user" required></form:input>
+			                  	<form:input type="text" path="name" placeholder="Username" autofocus="true" class="form-control form-control-user" required="required"></form:input>
 			                  	<form:errors path="name"></form:errors>
 			                  </div>
 		                  </spring:bind>
@@ -33,14 +33,14 @@
 		                <div class="form-group row">
 		                	<spring:bind path="registPassword">
 			                  <div class="col-sm-6 mb-3 mb-sm-0">
-			                    <form:input type="password" path="registPassword" placeholder="Password"  class="form-control form-control-user" required></form:input>
+			                    <form:input type="password" path="registPassword" placeholder="Password"  class="form-control form-control-user" required="required"></form:input>
 								<form:errors path="registPassword"></form:errors>
 			                  </div>
 		                  	</spring:bind>
 		                </div>
 		                <div class="form-group row">
 		                	<div class="col-sm-6">
-		                    	<form:input type="password" path="repeatRegistPassword" class="form-control form-control-user" placeholder="Repeat Password" required></form:input>
+		                    	<form:input type="password" path="repeatRegistPassword" class="form-control form-control-user" placeholder="Repeat Password" required="required"></form:input>
 		                    	<form:errors path="registPassword"></form:errors>
 		                  	</div>
 		                </div>

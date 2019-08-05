@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import com.h.crawler.model.auth.UserAccount;
+
 @Service
 public class SecurityServiceImpl implements SecurityService{
 	
@@ -19,8 +21,8 @@ public class SecurityServiceImpl implements SecurityService{
     
 	@Override
 	public String findLoggedInUsername() {
-		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (userDetails instanceof UserDetails) {
+		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (userDetails instanceof UserAccount) {
             return ((UserDetails)userDetails).getUsername();
         }
 
