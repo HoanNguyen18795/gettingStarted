@@ -18,43 +18,37 @@
 	          <div class="col-lg-7">
 	            <div class="p-5">
 	              <div class="text-center">
-	                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+	                <h1 class="h4 text-gray-900 mb-4">Change Password</h1>
 	              </div>
-	              <form:form method="POST" modelAttribute="accountForm" action="/adminRegistration" class="user">
+	              <form:form method="POST" modelAttribute="accountForm" action="/doChangePassword" class="user">
 	              	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		                <div class="form-group row">
-		                 <spring:bind path="name">
+		                	<spring:bind path="oldPassword">
 			                  <div class="col-sm-6 mb-3 mb-sm-0">
-			                  	<form:input type="text" path="name" placeholder="Username" autofocus="true" class="form-control form-control-user" required="required"></form:input>
-			                  	<form:errors class="text-danger" path="name"></form:errors>
-			                  </div>
-		                  </spring:bind>
-		                </div>
-		                <div class="form-group row">
-		                	<spring:bind path="registPassword">
-			                  <div class="col-sm-6 mb-3 mb-sm-0">
-			                    <form:input type="password" path="registPassword" placeholder="Password"  class="form-control form-control-user" required="required"></form:input>
-								<form:errors class="text-danger" path="registPassword"></form:errors>
+			                    <form:input type="password" path="oldPassword" placeholder="Old Password"  class="form-control form-control-user" required="required"></form:input>
+								<form:errors class="text-danger" path="oldPassword"></form:errors>
 			                  </div>
 		                  	</spring:bind>
 		                </div>
 		                <div class="form-group row">
-		                   <spring:bind path="repeatRegistPassword">
+		               	 <spring:bind path="newPassword">
 			                	<div class="col-sm-6">
-			                    	<form:input type="password" path="repeatRegistPassword" class="form-control form-control-user" placeholder="Repeat Password" required="required"></form:input>
-			                    	<form:errors class="text-danger" path="registPassword"></form:errors>
+			                    	<form:input type="password" path="newPassword" class="form-control form-control-user" placeholder="New Password" required="required"></form:input>
+			                    	<form:errors class="text-danger" path="newPassword"></form:errors>
 			                  	</div>
 		                  	</spring:bind>
 		                </div>
 		                <div class="form-group row">
-		                	<div class="col-sm-6 form-check">
-		                  		<form:checkbox class="form-check-input" path="isAdmin" value="true" id="isAdminCheckBox"/>
-		                  		<label class="form-check-label" for="isAdminCheckBox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Is Admin </label>
-		                  	</div>
+		               			 <spring:bind path="repeatNewPassword">
+				                	<div class="col-sm-6">
+				                    	<form:input type="password" path="repeatNewPassword" class="form-control form-control-user" placeholder="Repeat New Password" required="required"></form:input>
+				                    	<form:errors class="text-danger" path="newPassword"></form:errors>
+				                  	</div>
+			                  	</spring:bind>
 		                </div>
 		                <div class="form-group row">
 			                <div class="col-sm-3">
-			                 	<input class="btn btn-primary" type="submit" value="Create account">
+			                 	<input class="btn btn-primary" type="submit" value="Change password">
 			                 </div>
 			                 <div class="col-sm-1">
 			                 	<a href="/" class="btn btn-default">Cancel</a>

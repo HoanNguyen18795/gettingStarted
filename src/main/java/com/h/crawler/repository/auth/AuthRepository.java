@@ -14,4 +14,7 @@ public interface AuthRepository extends CrudRepository<Account, Long>{
 	@Query("SELECT CASE WHEN COUNT(1) > 0 THEN 'true' ELSE 'false' END FROM Account WHERE EMAIL = ?1")
 	boolean existByEmail(String email);
 	
+	@Query(value ="UPDATE ACCOUNT SET PASSWORD = ?1 WHERE ID = ?2", nativeQuery = true)
+	long changePassword(String newPassword, Long userId);
+	
 }

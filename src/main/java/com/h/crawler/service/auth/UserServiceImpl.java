@@ -31,4 +31,9 @@ public class UserServiceImpl implements UserService {
 		return authRepository.existByEmail(email);
 	}
 
+	@Override
+	public long changePassword(String newPassword, Long userId) {
+		return authRepository.changePassword(newPassword, userId);
+	}
+
 }

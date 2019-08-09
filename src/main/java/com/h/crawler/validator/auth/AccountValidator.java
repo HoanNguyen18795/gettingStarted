@@ -1,6 +1,5 @@
 package com.h.crawler.validator.auth;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -23,7 +22,6 @@ public class AccountValidator implements Validator{
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		// TODO Auto-generated method stub
 		return Account.class.equals(clazz);
 	}
 
@@ -31,29 +29,27 @@ public class AccountValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		RegistAccount account = (RegistAccount) target;
 		
-		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registPassword", "NotEmpty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "repeatRegistPassword", "NotEmpty");
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "registEmail", "NotEmpty");
-        if (StringUtils.isNotEmpty(account.getName()) && (account.getName().length() < 6 || account.getName().length() > 32)) {
+		if(errors.hasErrors()) {
+        	return;
+        }
+        if (account.getName().length() < Constants.MIN_USER_NAME_LENGTH || account.getName().length() > Constants.MAX_USER_NAME_LENGTH) {
             errors.rejectValue("name", "Size.userForm.username");
         }
-        if (StringUtils.isNotEmpty(account.getName()) && userService.findByUsername(account.getName()) != null) {
-            errors.rejectValue("name", "Duplicate.userForm.username");
-        }
-//        if (!account.getRegistEmail().matches(EMAIL_PATTERN)) {
-//        	errors.rejectValue("registEmail", "Format.userForm.email");
-//		}
-        
-//        if (userService.existByEmail(account.getRegistEmail())) {
-//        	errors.rejectValue("registEmail", "Duplicate.userForm.email");
-//		}
-
-        if (StringUtils.isNotEmpty(account.getRegistPassword()) && (account.getRegistPassword().length() < Constants.MIN_PASSWORD_LENGTH || account.getRegistPassword().length() > Constants.MAX_PASSWORD_LENGTH)) {
+        if (account.getRegistPassword().length() < Constants.MIN_PASSWORD_LENGTH || account.getRegistPassword().length() > Constants.MAX_PASSWORD_LENGTH) {
             errors.rejectValue("registPassword", "Size.userForm.password");
         }
-        
+        if(!account.getRegistPassword().equals(account.getRepeatRegistPassword())) {
+        	errors.rejectValue("registPassword", "Diff.userForm.passwordConfirm");
+        }
+        if(errors.hasErrors()) {
+        	return;
+        }
+        if (userService.findByUsername(account.getName()) != null) {
+            errors.rejectValue("name", "Duplicate.userForm.username");
+            return;
+        }
     }
-		
 }

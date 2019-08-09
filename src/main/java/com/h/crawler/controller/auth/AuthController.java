@@ -2,7 +2,6 @@ package com.h.crawler.controller.auth;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,7 @@ import com.h.crawler.service.auth.SecurityService;
 import com.h.crawler.service.auth.UserService;
 import com.h.crawler.util.UserUtil;
 import com.h.crawler.validator.auth.AccountValidator;
+import com.h.crawler.validator.auth.ChangePasswordValidator;
 
 @Controller
 public class AuthController {
@@ -32,6 +32,9 @@ public class AuthController {
 
 	 @Autowired
 	 private AccountValidator userValidator;
+	 
+	 @Autowired
+	 private ChangePasswordValidator changePassWordValidator;
 	 
 	 
 
@@ -70,14 +73,32 @@ public class AuthController {
     public String adminRegistration(@ModelAttribute("accountForm") RegistAccount accountForm
     								, BindingResult bindingResult
     								, Model model) {
+    	 userValidator.validate(accountForm, bindingResult);
     	 if (bindingResult.hasErrors()) {
-         	model.addAttribute("accountLogin", new Account());
             return "auth/adminRegister";
          }
     	 Account account = new Account(accountForm.getName(), accountForm.getRegistPassword(), UserUtil.FIXED_EMAIL, StringUtils.isEmpty(accountForm.getIsAdmin()) ? UserUtil.USER : UserUtil.ADMIN);
     	 account.setCreatorId(UserUtil.getUserSession().getId());
     	 account.setCreatedDate(Date.valueOf(LocalDate.now()));
     	 userService.save(account);
+    	 return "redirect:/";
+    }
+    
+    @RequestMapping(value="/changePassword", method = RequestMethod.GET)
+    public String adminChangePassword(Model model) {
+    	model.addAttribute("accountForm", new RegistAccount());
+    	return "auth/changePassword";
+    }
+    
+    @RequestMapping(value="/doChangePassword", method = RequestMethod.POST)
+    public String doChangePassword(@ModelAttribute("accountForm") RegistAccount accountForm
+    								, BindingResult bindingResult
+    								, Model model) {
+    	changePassWordValidator.validate(accountForm, bindingResult);
+    	 if (bindingResult.hasErrors()) {
+            return "auth/changePassword";
+         }
+    	 userService.changePassword(accountForm.getNewPassword(), UserUtil.getUserSession().getId());
     	 return "redirect:/";
     }
 

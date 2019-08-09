@@ -8,4 +8,6 @@ public interface UserService {
 	public Account findByUsername(String username);
 	
 	boolean existByEmail(String email);
+	
+	long changePassword(String newPassword, Long userId);
 }
