@@ -30,10 +30,4 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return authRepository.existByEmail(email);
 	}
-
-	@Override
-	public long changePassword(String newPassword, Long userId) {
-		return authRepository.changePassword(newPassword, userId);
-	}
-
 }

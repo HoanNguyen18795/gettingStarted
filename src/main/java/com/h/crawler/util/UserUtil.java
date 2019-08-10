@@ -35,11 +35,11 @@ public class UserUtil {
         return null;
 	}
 	
-	public static String getPassword() {
-		Object password = SecurityContextHolder.getContext().getAuthentication().getCredentials();
-        if (password instanceof String) {
-            return (String)password;
-        }
-        return null;
+	public static String getUserName() {
+		UserAccount user = getUserSession();
+		if(user == null) {
+			return null;
+		}
+		return user.getUsername();
 	}
 }

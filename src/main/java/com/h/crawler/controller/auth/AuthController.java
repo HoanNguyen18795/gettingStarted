@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.h.crawler.model.Cart.Cart;
 import com.h.crawler.model.auth.Account;
 import com.h.crawler.model.auth.RegistAccount;
+import com.h.crawler.repository.auth.AuthDAOCustomImpl;
 import com.h.crawler.service.auth.SecurityService;
 import com.h.crawler.service.auth.UserService;
 import com.h.crawler.util.UserUtil;
@@ -35,6 +37,9 @@ public class AuthController {
 	 
 	 @Autowired
 	 private ChangePasswordValidator changePassWordValidator;
+	 
+	 @Autowired
+	 AuthDAOCustomImpl authDAOCustomImpl;
 	 
 	 
 
@@ -68,7 +73,7 @@ public class AuthController {
     	model.addAttribute("accountForm", new RegistAccount());
     	return "auth/adminRegister";
     }
-    
+    @Transactional
     @RequestMapping(value="/adminRegistration", method = RequestMethod.POST)
     public String adminRegistration(@ModelAttribute("accountForm") RegistAccount accountForm
     								, BindingResult bindingResult
@@ -89,7 +94,7 @@ public class AuthController {
     	model.addAttribute("accountForm", new RegistAccount());
     	return "auth/changePassword";
     }
-    
+    @Transactional
     @RequestMapping(value="/doChangePassword", method = RequestMethod.POST)
     public String doChangePassword(@ModelAttribute("accountForm") RegistAccount accountForm
     								, BindingResult bindingResult
@@ -98,7 +103,8 @@ public class AuthController {
     	 if (bindingResult.hasErrors()) {
             return "auth/changePassword";
          }
-    	 userService.changePassword(accountForm.getNewPassword(), UserUtil.getUserSession().getId());
+    	 Long userId = UserUtil.getUserSession().getId();
+    	 authDAOCustomImpl.changePassword(accountForm.getNewPassword(), userId);
     	 return "redirect:/";
     }
 
