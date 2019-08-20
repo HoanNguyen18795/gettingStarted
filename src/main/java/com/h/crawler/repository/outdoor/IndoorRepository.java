@@ -48,6 +48,7 @@ public class IndoorRepository extends BaseDAOCustom{
 					"WHERE " + 
 					" OUT_DOOR_ID = :outDoorId";
 		Query query = entityManager.createNativeQuery(sql);
+		query.setParameter("outDoorId", outDoorId);
 		List<InDoorDTO> result = new ArrayList<InDoorDTO>();
 		InDoorDTO inDoorDTO;
 		List<Object[][]> queryResult = query.getResultList();
