@@ -36,3 +36,8 @@
 	
 	<!-- Custom scripts for all pages-->
 	<script src="/admin/js/sb-admin-2.min.js"></script>
+	
+	<!-- datatables -->
+	<link rel="stylesheet" type="text/css" href="/admin/js/DataTables/datatables.css"/>
+ 
+	<script type="text/javascript" src="/admin/js/DataTables/datatables.js"></script>

@@ -20,3 +20,15 @@
 	
 	<!-- Custom scripts for all pages-->
 	<script src="/admin/js/sb-admin-2.min.js"></script>
+	
+	<!-- datatables -->
+	<link rel="stylesheet" type="text/css" href="/admin/js/DataTables/datatables.css"/>
+ 
+	<script type="text/javascript" src="/admin/js/DataTables/datatables.js"></script>
+	
+	<!-- 	jquery UI -->
+	<link rel="stylesheet" href="/admin/js/jquery-ui-1.12.1.custom/jquery-ui.css">
+	<script src="/admin/js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+	
+	<!-- 	MomentJS -->
+	<script src="/admin/js/moment.js"></script>

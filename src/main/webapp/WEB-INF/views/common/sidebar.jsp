@@ -54,7 +54,9 @@
     	<div id="${outdoor.name}${outdoor.id}" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 	      	<div class="bg-white py-2 collapse-inner rounded">
 	      		<c:forEach items="${outdoor.indoorList}" var="indoor">
-		        	<a class="collapse-item" href="utilities-color.html">${indoor.name}</a>
+		        	<a class="collapse-item" href="#" onclick="showIndoorDetail(${indoor.id})">${indoor.name}</a>
+<%-- 		        	<button class="collapse-item" onclick="showIndoorDetail(value)" value="${indoor.id}">${indoor.name}</button> --%>
+<%-- 		        	<input type="hidden" value="${indoor.id}" id="${indoor.name}${indoor.id}"/> --%>
 		        </c:forEach>
       		</div>
     	</div>
