@@ -26,7 +26,7 @@
 		  <!-- End of Topbar -->
 	        <!-- Begin Page Content -->
 	        <div class="container-fluid">
-				<table id="table_id" class="display">
+				<table id="table_id" class="table table-striped table-bordered" style="width:100%">
 					<thead>
 						<tr>
 							<th>DAY</th>
