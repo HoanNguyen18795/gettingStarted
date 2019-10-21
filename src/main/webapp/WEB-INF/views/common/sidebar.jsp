@@ -36,38 +36,13 @@
    </li>
   </security:authorize>
   <!-- Nav Item - Utilities Collapse Menu -->
-  <c:forEach items="${outdoorList}" var="outdoor">
-    <li class="nav-item">
-    	<c:if test="${not empty outdoor.indoorList}">
-	    	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#${outdoor.name}${outdoor.id}" aria-expanded="true" aria-controls="collapseUtilities">
-		      		<i class="fas fa-fw fa-wrench"></i>
-		      		<span>${outdoor.name}</span>
-		    </a>
-		</c:if>
-		<c:if test="${empty outdoor.indoorList}">
-	    	<a class="nav-link collapsed" href="#" aria-expanded="true" aria-controls="collapseUtilities">
-		      		<i class="fas fa-fw fa-wrench"></i>
-		      		<span>${outdoor.name}</span>
-		    </a>
-		</c:if>
-	    <c:if test="${not empty outdoor.indoorList}">
-    	<div id="${outdoor.name}${outdoor.id}" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-	      	<div class="bg-white py-2 collapse-inner rounded">
-	      		<c:forEach items="${outdoor.indoorList}" var="indoor">
-		        	<a class="collapse-item" href="#" onclick="showIndoorDetail(${indoor.id})">${indoor.name}</a>
-<%-- 		        	<button class="collapse-item" onclick="showIndoorDetail(value)" value="${indoor.id}">${indoor.name}</button> --%>
-<%-- 		        	<input type="hidden" value="${indoor.id}" id="${indoor.name}${indoor.id}"/> --%>
-		        </c:forEach>
-      		</div>
-    	</div>
-    	</c:if>
-  	</li>
-  </c:forEach>
-
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
-
-  <!-- Sidebar Toggler (Sidebar) -->
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/createProduct"> <i class="fas fa-fw fa-cog"></i> <span><spring:message code="sidebar.createProduct" text="default" /></span>
+	</a>
+	</li>
+	<!-- Sidebar Toggler (Sidebar) -->
   <div class="text-center d-none d-md-inline">
     <button class="rounded-circle border-0" id="sidebarToggle"></button>
   </div>

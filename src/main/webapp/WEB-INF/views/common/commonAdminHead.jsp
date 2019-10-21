@@ -23,8 +23,17 @@
 	
 	<!-- datatables -->
 	<link rel="stylesheet" type="text/css" href="/admin/js/DataTables/datatables.css"/>
- 
 	<script type="text/javascript" src="/admin/js/DataTables/datatables.js"></script>
+	<!-- datatables buttons -->
+	
+	<script type="text/javascript" src="/admin/js/DataTables/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="/admin/js/DataTables/jszip.min.js"></script>
+	<script type="text/javascript" src="/admin/js/DataTables/pdfmake.min.js"></script>
+	<script type="text/javascript" src="/admin/js/DataTables/vfs_fonts.js"></script>
+	
+	<script type="text/javascript" src="/admin/js/DataTables/buttons.flash.min.js"></script>
+	<script type="text/javascript" src="/admin/js/DataTables/buttons.html5.min.js"></script>
+	<script type="text/javascript" src="/admin/js/DataTables/buttons.print.min.js"></script>
 	
 	<!-- 	jquery UI -->
 	<link rel="stylesheet" href="/admin/js/jquery-ui-1.12.1.custom/jquery-ui.css">
